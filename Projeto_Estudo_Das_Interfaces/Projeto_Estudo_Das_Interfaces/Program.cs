@@ -12,7 +12,15 @@ namespace Projeto_Estudo_Das_Interfaces
         {
             using (var _context = new AppDbContext())
             {
-                IEnumerable<Aluno> alunos = _context.Alunos;
+                #region Diferença ente IEnumerable x IQueryable
+
+                //retorna todos os dados do banco de dados e fez o filtro na memoria
+                //IEnumerable<Aluno> alunos = _context.Alunos;  
+
+                //retorna somente os registros necessarios pois o filtro ja é feito no banco de dados
+                IQueryable<Aluno> alunos = _context.Alunos;
+
+                #endregion
 
                 IEnumerable<Aluno> resultado = alunos.Where(a => a.Idade > 21).ToList();
 
